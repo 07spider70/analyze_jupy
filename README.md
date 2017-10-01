@@ -1,3 +1,6 @@
-<h1>Alpha version of jupyternotebook analyzator</h1>
+<div align=center>
 
-<b>Work in progress</b>
+<h2>Alpha version of jupyternotebook analyzator</h2>
+<p style='color:red'><b>Work in progress..</b></p>
+
+</div>
