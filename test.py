@@ -1,5 +1,5 @@
 import subprocess as sub
-import time
+import datetime
 
 
 def get_proc_usr(name): #not reliable
@@ -52,7 +52,6 @@ def neuplne(date,data): #difference between login & logout
         #    out.append(i)
     return sorted(i for i in logi if i not in logo )
 
-import datetime
 
 def last_seven_days(data,name): #return number of logins in last 7 days
 	days, x=7,7
