@@ -1,11 +1,14 @@
 import subprocess as sub
+import time
 
-def get_proc_usr(name):
+
+def get_proc_usr(name): #not reliable
 	bash= 'ps aux | grep %s | wc' % name
 	command = sub.Popen(bash, stdout=sub.PIPE,shell=True)
 	output, error = command.communicate()
 	return (output,error)
 
+#not reliable too
 def if_left_on(name): #return true if name left server in running state else return false
 
 	output, error = get_proc_usr(name)
@@ -38,7 +41,7 @@ def logout(date,data): #date must be in english format = year-month-day
 
 
 #test
-def neuplne(date,data): #rozdil medzi prihlasenymi a odhlasenymi
+def neuplne(date,data): #difference between login & logout
     logi = login(date,data)
     logo = logout(date,data)
     #out = []
@@ -48,3 +51,33 @@ def neuplne(date,data): #rozdil medzi prihlasenymi a odhlasenymi
        # else:
         #    out.append(i)
     return sorted(i for i in logi if i not in logo )
+
+import datetime
+
+def last_seven_days(data,name): #return number of logins in last 7 days
+	days, x=7,7
+	pocet=0
+	w_name='{:1}{}{}'.format(' ',name,'\n')
+	while days!=0:
+		that_date = str((datetime.datetime.now() - datetime.timedelta(days)).date())
+		arr = login(that_date,data)
+		if w_name in arr:
+			while w_name in arr:
+				pocet+=1
+				arr.remove(w_name)
+		days-=1
+	return name,'bol prihlaseny %d krat za poslednych %d dni' % (pocet,x)
+
+def last_x_days(data,name,x):
+	days = x
+	pocet=0
+	w_name='{:1}{}{}'.format(' ',name,'\n')
+	while days!=0:
+		that_date = str((datetime.datetime.now() - datetime.timedelta(days)).date())
+		arr = login(that_date,data)
+		if w_name in arr:
+			while w_name in arr:
+				pocet+=1
+				arr.remove(w_name)
+		days-=1
+	return name,'bol prihlaseny %d krat za poslednych %d dni' % (pocet,x)
