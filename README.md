@@ -46,3 +46,15 @@
 		</li>
 	</ol
 </div>
+
+<div>
+<p><b>TODO</b></p>
+<p>
+	instalation script
+	multilang
+	clean-up
+	comments
+	lucidity
+</p>
+
+</div>
