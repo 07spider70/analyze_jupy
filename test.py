@@ -61,9 +61,10 @@ def last_seven_days(data,name): #return number of logins in last 7 days
 		that_date = str((datetime.datetime.now() - datetime.timedelta(days)).date())
 		arr = login(that_date,data)
 		if w_name in arr:
-			while w_name in arr:
-				pocet+=1
-				arr.remove(w_name)
+			#while w_name in arr:
+				#pocet+=1
+				#arr.remove(w_name)
+				pocet+=arr.count(w_name)
 		days-=1
 	return name,'bol prihlaseny %d krat za poslednych %d dni' % (pocet,x)
 
@@ -75,8 +76,9 @@ def last_x_days(data,name,x):
 		that_date = str((datetime.datetime.now() - datetime.timedelta(days)).date())
 		arr = login(that_date,data)
 		if w_name in arr:
-			while w_name in arr:
-				pocet+=1
-				arr.remove(w_name)
+			#while w_name in arr:
+				#pocet+=1
+				#arr.remove(w_name)
+				pocet+=arr.count(w_name)
 		days-=1
 	return name,'bol prihlaseny %d krat za poslednych %d dni' % (pocet,x)
