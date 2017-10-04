@@ -1,5 +1,29 @@
 import subprocess as sub
-import datetime
+import json
+
+def open_json(data_f='config.json'): #open json config file
+	with open(data_f) as data_file:
+		data = json.load(data_file)
+	return(data)
+
+path = open_json()["path"]
+if open_json()["lang"]==0: #set lang according to config file
+			from lang_set_sk import *
+else:
+			from lang_set_en import *
+
+
+
+def zapis_config(key,value): #write to config file
+	with open("config.json", "r+") as jsonFile:
+		data = json.load(jsonFile)
+		tmp = data[key]
+		data[key] = value
+
+		jsonFile.seek(0)  # rewind
+		json.dump(data, jsonFile)
+		jsonFile.truncate()
+
 
 
 def get_proc_usr(name): #not reliable
@@ -19,7 +43,7 @@ def if_left_on(name): #return true if name left server in running state else ret
 	else:
 		return False
 
-def get_data(log='/var/log/jupyterhub.log'):
+def get_data(log=path):
 	with open(log,'r') as file:
 		data = file.readlines()
 	return (data)
@@ -52,6 +76,7 @@ def neuplne(date,data): #difference between login & logout
         #    out.append(i)
     return sorted(i for i in logi if i not in logo )
 
+import datetime
 
 def last_seven_days(data,name): #return number of logins in last 7 days
 	days, x=7,7
@@ -66,7 +91,7 @@ def last_seven_days(data,name): #return number of logins in last 7 days
 				#arr.remove(w_name)
 				pocet+=arr.count(w_name)
 		days-=1
-	return name,'bol prihlaseny %d krat za poslednych %d dni' % (pocet,x)
+	return name,re_how_m_times % (pocet,x)
 
 def last_x_days(data,name,x):
 	days = x
@@ -81,4 +106,5 @@ def last_x_days(data,name,x):
 				#arr.remove(w_name)
 				pocet+=arr.count(w_name)
 		days-=1
-	return name,'bol prihlaseny %d krat za poslednych %d dni' % (pocet,x)
+	return name,re_how_m_times % (pocet,x)
+
