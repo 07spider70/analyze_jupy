@@ -50,11 +50,11 @@
 <div>
 <p><b>TODO</b></p>
 <p>
-	instalation script
-	multilang
-	clean-up
-	comments
-	lucidity
+	instalation script<br>
+	multilang<br>
+	clean-up<br>
+	comments<br>
+	lucidity<br>
 </p>
 
 </div>
